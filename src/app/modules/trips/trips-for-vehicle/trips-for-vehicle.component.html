@@ -1,0 +1,26 @@
+<div class="card-container">
+  <mat-card>
+    <mat-card-header>
+      Trips Scheduled For
+      <b style="margin-left: 0.5rem">{{ vehicleDisplayName ?? "Vehicle" }}</b>
+    </mat-card-header>
+    <mat-card-content>
+      <app-shared-table
+        [listObservable$]="tripData$"
+        [columnConfig]="columnnConfig"
+        [loadingData]="loading"
+        (actionIconClicked)="handleActionClick($event)"
+      ></app-shared-table>
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button mat-stroked-button (click)="goBack()">Back</button>
+      <button
+        style="margin-left: 1rem"
+        mat-flat-button
+        (click)="registerVehicleTrip()"
+      >
+        Add Trip
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

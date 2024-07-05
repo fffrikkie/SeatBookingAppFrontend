@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 1rem;
+}
+
+.details {
+  display: flex;
+  gap: 5rem;
+
+  .details-col {
+    display: flex;
+    flex-direction: column;
+  }
+}

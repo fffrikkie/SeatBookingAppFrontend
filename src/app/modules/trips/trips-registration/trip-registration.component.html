@@ -1,0 +1,118 @@
+<div class="card-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Register a Trip</mat-card-title>
+      <mat-card-subtitle>Fill in the trip's information</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content
+      style="display: flex; padding: 1rem"
+      [formGroup]="tripInfoGroup"
+    >
+      <div class="vehicle-fields">
+        <label>Select your vehicle:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>Vehicle</mat-label>
+          <mat-select formControlName="vehicle">
+            <mat-option>None</mat-option>
+            @for (vehicle of vehicles; track vehicle) {
+            <mat-option [value]="vehicle.id">{{
+              vehicle.displayName
+            }}</mat-option>
+            }
+          </mat-select>
+          @if (tripInfoGroup.get('vehicle')?.hasError('required')) {
+          <mat-error>Please choose a vehicle</mat-error>
+          }
+        </mat-form-field>
+
+        <label>Enter starting destination:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>From</mat-label>
+          <input matInput formControlName="fromDestination" />
+          @if (tripInfoGroup.get('fromDestination')?.hasError('required')) {
+          <mat-error>Please choose a starting destination</mat-error>
+          }
+        </mat-form-field>
+
+        <label>Enter end destination:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>To</mat-label>
+          <input matInput formControlName="toDestination" />
+          @if (tripInfoGroup.get('toDestination')?.hasError('required')) {
+          <mat-error>Please choose an end destination</mat-error>
+          }
+        </mat-form-field>
+
+        <label>Total number of seats:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>Seats</mat-label>
+          <input matInput formControlName="totalSeats" />
+        </mat-form-field>
+
+        <label>Enter the amount of available seats:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>Seats</mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            formControlName="availableSeats"
+          />
+          @if (tripInfoGroup.get('availableSeats')?.hasError('required')) {
+          <mat-error>Please indicate the available seats</mat-error>
+          } @if (tripInfoGroup.get('availableSeats')?.hasError('max')) {
+          <mat-error>Available seats cannot exceed total seats.</mat-error>
+          }
+        </mat-form-field>
+
+        <label>Enter departure date and time:</label>
+        <div class="date-time-picker">
+          <mat-form-field appearance="fill" style="width: 75%">
+            <mat-label>Choose a date</mat-label>
+            <input
+              matInput
+              formControlName="departureDate"
+              [min]="currDate"
+              [matDatepicker]="datepicker"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="datepicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker> </mat-datepicker>
+            @if (tripInfoGroup.get('departureDate')?.hasError('required')) {
+            <mat-error>Please choose a departure date</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              formControlName="departureTime"
+              type="time"
+              onfocus="this.showPicker()"
+            />
+            <mat-icon matIconSuffix>access_time</mat-icon>
+            @if (tripInfoGroup.get('departureTime')?.hasError('required')) {
+            <mat-error>Please choose a departure time</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-icon class="icon">map</mat-icon>
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button mat-stroked-button (click)="goBack()">Back</button>
+      <button
+        style="margin-left: 1rem"
+        mat-flat-button
+        [disabled]="tripInfoGroup.invalid"
+        (click)="submitTripRegistration()"
+      >
+        Submit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

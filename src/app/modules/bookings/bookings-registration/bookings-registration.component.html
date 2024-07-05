@@ -1,0 +1,34 @@
+<div class="fields" [formGroup]="bookingInfoGroup">
+  <div class="fields-col">
+    <label>Enter your name:</label>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="travellerName" />
+      @if (bookingInfoGroup.get('travellerName')?.hasError('required')) {
+      <mat-error>Please enter your name</mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div class="fields-col">
+    <label>Enter the amount of available seats:</label>
+    <mat-form-field appearance="fill">
+      <mat-label>Seats</mat-label>
+      <input matInput type="number" formControlName="numberOfSeatsBooked" />
+      @if (bookingInfoGroup.get('numberOfSeatsBooked')?.hasError('required')) {
+      <mat-error>
+        Please indicate the number of seats you would like to book
+      </mat-error>
+      } @if (bookingInfoGroup.get('numberOfSeatsBooked')?.hasError('min')) {
+      <mat-error>Must book atleast 1 seat</mat-error>
+      }
+    </mat-form-field>
+  </div>
+</div>
+<button
+  mat-flat-button
+  [disabled]="bookingInfoGroup.invalid || !bookingInfoGroup.dirty"
+  (click)="submitBookingRegistration()"
+>
+  Submit
+</button>

@@ -1,0 +1,9 @@
+.loading-container {
+  width: 100%;
+  height: 100%;
+}
+
+.available-display {
+  width: 10px;
+  height: 20px;
+}

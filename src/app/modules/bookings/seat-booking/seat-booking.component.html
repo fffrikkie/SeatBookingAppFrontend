@@ -1,0 +1,53 @@
+@if (loading) {
+<div class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>
+} @if (!loading) {
+<div class="card-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Bookings</mat-card-title>
+      <mat-card-subtitle>
+        Bookings for the trip from
+        {{ tripBookings?.tripInfo?.startDestination }} to
+        {{ tripBookings?.tripInfo?.endDestination }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content style="padding: 1rem">
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="step === 0" (opened)="step = 0">
+          <mat-expansion-panel-header>
+            Trip Information
+          </mat-expansion-panel-header>
+          <app-bookings-trip-info
+            [tripInfo]="tripBookings?.tripInfo"
+            [vehicleInfo]="tripBookings?.vehicleInfo"
+          ></app-bookings-trip-info>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 1" (opened)="step = 1">
+          <mat-expansion-panel-header>
+            Current Bookings
+          </mat-expansion-panel-header>
+          <app-bookings-list
+            [bookingsList]="tripBookings!.bookings"
+            (bookingDeleted)="reload()"
+          ></app-bookings-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 2" (opened)="step = 2">
+          <mat-expansion-panel-header>
+            Register Booking
+          </mat-expansion-panel-header>
+          <app-bookings-registration
+            [tripId]="tripBookings?.tripInfo?.id!"
+            (bookingRegistered)="bookingRegistered()"
+          ></app-bookings-registration>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button mat-stroked-button (click)="goBack()">Back</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+}

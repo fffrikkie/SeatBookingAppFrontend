@@ -1,0 +1,82 @@
+<div class="card-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Vehicle information</mat-card-title>
+      <mat-card-subtitle>Update your vehicle's information</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content
+      style="display: flex; padding: 1rem"
+      [formGroup]="vehicleInfoGroup"
+    >
+      <div class="vehicle-fields">
+        <label>Enter your vehicle's make:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>Make</mat-label>
+          <input matInput formControlName="make" />
+          @if (vehicleInfoGroup.get('make')?.hasError('required')) {
+          <mat-error>Please enter the vehicle make</mat-error>
+          }
+        </mat-form-field>
+        <label>Enter your vehicle's model:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>Model</mat-label>
+          <input matInput formControlName="model" />
+          @if (vehicleInfoGroup.get('model')?.hasError('required')) {
+          <mat-error>Please enter the vehicle model</mat-error>
+          }
+        </mat-form-field>
+        <label>Enter your vehicle's variant:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>Variant</mat-label>
+          <input matInput formControlName="variant" />
+          @if (vehicleInfoGroup.get('variant')?.hasError('required')) {
+          <mat-error>Please enter the vehicle variant</mat-error>
+          }
+        </mat-form-field>
+        <label>Enter your vehicle's registration year:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>Registration Year</mat-label>
+          <input
+            matInput
+            type="number"
+            min="1900"
+            formControlName="registrationYear"
+          />
+          @if (vehicleInfoGroup.get('registrationYear')?.hasError('required')) {
+          <mat-error>Please enter the vehicle registration year</mat-error>
+          } @if (vehicleInfoGroup.get('registrationYear')?.hasError('min')) {
+          <mat-error>Registration year can't be earlier than 1900</mat-error>
+          }
+        </mat-form-field>
+        <label>Enter the number of seats of your vehicle:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>No. of Seats</mat-label>
+          <input
+            matInput
+            type="number"
+            min="1"
+            formControlName="numberOfSeats"
+          />
+          @if (vehicleInfoGroup.get('numberOfSeats')?.hasError('required')) {
+          <mat-error>Please enter the number of seats in the vehicle</mat-error>
+          } @if (vehicleInfoGroup.get('numberOfSeats')?.hasError('min')) {
+          <mat-error>Vehicle must have at least 1 seat</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <mat-icon class="icon">directions_car</mat-icon>
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button mat-stroked-button (click)="goBack()">Back</button>
+      <button
+        style="margin-left: 1rem"
+        mat-flat-button
+        [disabled]="vehicleInfoGroup.invalid || !vehicleInfoGroup.dirty"
+        (click)="submitVehicleUpdates()"
+      >
+        Submit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

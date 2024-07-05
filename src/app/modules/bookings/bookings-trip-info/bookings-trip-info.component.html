@@ -1,0 +1,42 @@
+<div class="container">
+  <div>
+    <div class="header">Trip Details:</div>
+    <div class="details">
+      <div class="details-col">
+        <span> <b>From:</b> {{ tripInfo?.startDestination }} </span>
+        <span>
+          <b>Available Seats:</b> {{ tripInfo?.totalAvailableSeats }}
+        </span>
+      </div>
+      <div class="details-col">
+        <span> <b>To:</b> {{ tripInfo?.endDestination }} </span>
+        <span>
+          <b>Departure Date:</b>
+          {{ tripInfo?.departureDateTime | date : "medium" }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="header">Vehicle Details:</div>
+    <div class="details">
+      <div class="details-col">
+        <span> <b>Owner:</b> {{ vehicleInfo?.ownerName }} </span>
+        <span> <b>Model:</b> {{ vehicleInfo?.model }} </span>
+        <span>
+          <b>Total Seats:</b>
+          {{ vehicleInfo?.numberOfSeats }}
+        </span>
+      </div>
+      <div class="details-col">
+        <span> <b>Make:</b> {{ vehicleInfo?.make }} </span>
+        <span> <b>Variant:</b> {{ vehicleInfo?.variant }} </span>
+        <span>
+          <b>Registration Year:</b>
+          {{ vehicleInfo?.registrationYear }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

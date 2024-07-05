@@ -1,0 +1,36 @@
+@if (bookingsList && bookingsList.length === 0 ) {
+<h1>No Bookings Yet</h1>
+} @else {
+<table mat-table [dataSource]="bookingsList" class="mat-elevation-z8">
+  <ng-container matColumnDef="travellerName">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.travellerName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberOfSeatsBooked">
+    <th mat-header-cell *matHeaderCellDef>No. Of Seats Booked</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.numberOfSeatsBooked }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      @if (element.travellerName === currentUser) {
+      <mat-icon
+        style="color: red"
+        matTooltip="Delete Booking"
+        matTooltipPosition="above"
+        (click)="deleteBooking(element.id)"
+      >
+        delete
+      </mat-icon>
+      }
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+}

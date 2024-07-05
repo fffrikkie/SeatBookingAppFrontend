@@ -1,0 +1,15 @@
+.tab-content-container {
+  padding: 10px;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .table-container {
+    overflow: auto;
+    flex: 1 0 0;
+    position: relative;
+  }
+}

@@ -1,0 +1,16 @@
+.nav-list-container {
+  padding: 0.5rem;
+  background-color: rgb(4, 107, 155);
+
+  .nav-list {
+    display: flex;
+    gap: 0.5rem;
+    color: white;
+    font-size: large;
+
+    .activeLink {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  }
+}

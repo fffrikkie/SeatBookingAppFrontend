@@ -1,0 +1,9 @@
+.fields {
+  display: flex;
+  gap: 5rem;
+
+  .fields-col {
+    display: flex;
+    flex-direction: column;
+  }
+}

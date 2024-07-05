@@ -1,0 +1,6 @@
+<app-shared-table
+  [listObservable$]="vehiclesData$"
+  [columnConfig]="columnnConfig"
+  [loadingData]="loading"
+  (actionIconClicked)="handleActionClick($event)"
+></app-shared-table>
